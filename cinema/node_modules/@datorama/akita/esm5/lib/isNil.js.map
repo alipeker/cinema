@@ -1,0 +1,1 @@
+{"version":3,"file":"isNil.js","sourceRoot":"ng://@datorama/akita/","sources":["lib/isNil.ts"],"names":[],"mappings":"AAAA,YAAY;AACZ,MAAM,UAAU,KAAK,CAAC,CAAC;IACrB,OAAO,CAAC,KAAK,IAAI,IAAI,CAAC,KAAK,SAAS,CAAC;AACvC,CAAC","sourcesContent":["// @internal\nexport function isNil(v) {\n  return v === null || v === undefined;\n}\n"]}

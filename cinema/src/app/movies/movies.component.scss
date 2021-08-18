@@ -1,0 +1,13 @@
+.card-img-top {
+  height: 16vw !important;
+  object-fit: scale-down;
+}
+
+.card-body {
+  overflow-y: scroll;
+  max-height: 16vw;
+}
+
+.card {
+  margin-top: 10px;
+}

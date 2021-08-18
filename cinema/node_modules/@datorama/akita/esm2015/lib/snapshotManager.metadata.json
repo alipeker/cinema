@@ -1,0 +1,1 @@
+[{"__symbolic":"module","version":4,"metadata":{"SnapshotManager":{"__symbolic":"class","members":{"getStoresSnapshot":[{"__symbolic":"method"}],"setStoresSnapshot":[{"__symbolic":"method"}]}},"snapshotManager":{"__symbolic":"new","expression":{"__symbolic":"reference","name":"SnapshotManager"}}}}]

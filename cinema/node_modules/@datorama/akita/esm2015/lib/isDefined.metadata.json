@@ -1,0 +1,1 @@
+[{"__symbolic":"module","version":4,"metadata":{"isDefined":{"__symbolic":"function","parameters":["val"],"value":{"__symbolic":"binop","operator":"===","left":{"__symbolic":"call","expression":{"__symbolic":"reference","module":"./isNil","name":"isNil","line":4,"character":9},"arguments":[{"__symbolic":"reference","name":"val"}]},"right":false}}}}]

@@ -1,0 +1,1 @@
+{"version":3,"file":"isFunction.js","sourceRoot":"ng://@datorama/akita/","sources":["lib/isFunction.ts"],"names":[],"mappings":"AAAA,YAAY;AACZ,MAAM,UAAU,UAAU,CAAC,KAAU;IACnC,OAAO,OAAO,KAAK,KAAK,UAAU,CAAC;AACrC,CAAC","sourcesContent":["// @internal\nexport function isFunction(value: any): value is Function {\n  return typeof value === 'function';\n}\n"]}

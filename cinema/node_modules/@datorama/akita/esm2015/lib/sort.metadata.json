@@ -1,0 +1,1 @@
+[{"__symbolic":"module","version":4,"metadata":{"Order":{"ASC":"asc","DESC":"desc"},"compareValues":{"__symbolic":"function","parameters":["key","order"],"value":{"__symbolic":"error","message":"Lambda not supported","line":7,"character":9},"defaults":[null,{"__symbolic":"select","expression":{"__symbolic":"reference","name":"Order"},"member":"ASC"}]}}}]

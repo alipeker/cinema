@@ -1,0 +1,21 @@
+.app-container {
+  height: 100%;
+  overflow: hidden;
+}
+
+.app-header {
+  height: 8%;
+}
+
+.app-body {
+  height: 89%;
+}
+
+app-body{
+  width: 100%;
+}
+
+.app-footer {
+  height: 3%;
+  background-color: black;
+}

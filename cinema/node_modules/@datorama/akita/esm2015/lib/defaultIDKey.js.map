@@ -1,0 +1,1 @@
+{"version":3,"file":"defaultIDKey.js","sourceRoot":"ng://@datorama/akita/","sources":["lib/defaultIDKey.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,MAAM,cAAc,GAAG,IAAI,CAAC","sourcesContent":["export const DEFAULT_ID_KEY = 'id';\n"]}

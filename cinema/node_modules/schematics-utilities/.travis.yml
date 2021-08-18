@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - 14
+branches:
+  only:
+    - 'master'
+cache:
+  directories:
+    - node_modules
+before_script:
+  - npm run build
+script: npm run test:sanity

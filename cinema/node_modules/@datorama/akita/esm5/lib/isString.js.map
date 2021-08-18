@@ -1,0 +1,1 @@
+{"version":3,"file":"isString.js","sourceRoot":"ng://@datorama/akita/","sources":["lib/isString.ts"],"names":[],"mappings":"AAAA,YAAY;AACZ,MAAM,UAAU,QAAQ,CAAC,KAAU;IACjC,OAAO,OAAO,KAAK,KAAK,QAAQ,CAAC;AACnC,CAAC","sourcesContent":["// @internal\nexport function isString(value: any): value is string {\n  return typeof value === 'string';\n}\n"]}

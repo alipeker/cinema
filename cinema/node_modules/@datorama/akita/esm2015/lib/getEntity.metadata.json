@@ -1,0 +1,1 @@
+[{"__symbolic":"module","version":4,"metadata":{"findEntityByPredicate":{"__symbolic":"function"},"getEntity":{"__symbolic":"function","parameters":["id","project"],"value":{"__symbolic":"error","message":"Lambda not supported","line":17,"character":9}}}}]

@@ -1,0 +1,1 @@
+[{"__symbolic":"module","version":4,"metadata":{"SortBy":{"__symbolic":"interface"},"SortByOptions":{"__symbolic":"interface"},"QueryConfigOptions":{"__symbolic":"interface"},"queryConfigKey":"akitaQueryConfig","QueryConfig":{"__symbolic":"function","parameters":["metadata"],"value":{"__symbolic":"error","message":"Lambda not supported","line":14,"character":9}}}}]

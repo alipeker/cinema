@@ -1,0 +1,1 @@
+[{"__symbolic":"module","version":4,"metadata":{"StoreConfigOptions":{"__symbolic":"interface"},"UpdatableStoreConfigOptions":{"__symbolic":"interface"},"configKey":"akitaConfig","StoreConfig":{"__symbolic":"function","parameters":["metadata"],"value":{"__symbolic":"error","message":"Lambda not supported","line":18,"character":9}}}}]

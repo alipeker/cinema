@@ -1,0 +1,29 @@
+.movie-background {
+  background-color: black;
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  height: 89%;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 6%;
+  left: 0px;
+}
+
+.movie-details {
+  position: absolute;
+  z-index: 2;
+  width: 80vh;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.454);
+  text-align: center;
+}
+
+.movieImage{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 96vw;
+}

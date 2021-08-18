@@ -1,0 +1,1 @@
+[{"__symbolic":"module","version":4,"metadata":{"hasEntity":{"__symbolic":"function","parameters":["entities","id"],"value":{"__symbolic":"call","expression":{"__symbolic":"select","expression":{"__symbolic":"reference","name":"entities"},"member":"hasOwnProperty"},"arguments":[{"__symbolic":"reference","name":"id"}]}}}}]

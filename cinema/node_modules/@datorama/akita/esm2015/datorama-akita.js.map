@@ -1,0 +1,1 @@
+{"version":3,"file":"datorama-akita.js","sourceRoot":"ng://@datorama/akita/","sources":["datorama-akita.ts"],"names":[],"mappings":"AAAA;;GAEG;AAEH,cAAc,SAAS,CAAC;AAExB,OAAO,EAAC,SAAS,IAAI,EAAE,EAAC,MAAM,YAAY,CAAC","sourcesContent":["/**\n * Generated bundle index. Do not edit.\n */\n\nexport * from './index';\n\nexport {isBrowser as ɵa} from './lib/root';"]}

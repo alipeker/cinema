@@ -1,0 +1,1 @@
+{"version":3,"file":"isArray.js","sourceRoot":"ng://@datorama/akita/","sources":["lib/isArray.ts"],"names":[],"mappings":"AAAA,YAAY;AACZ,MAAM,UAAU,OAAO,CAAI,KAAU;IACnC,OAAO,KAAK,CAAC,OAAO,CAAC,KAAK,CAAC,CAAC;AAC9B,CAAC","sourcesContent":["// @internal\nexport function isArray<T>(value: any): value is T[] {\n  return Array.isArray(value);\n}\n"]}

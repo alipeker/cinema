@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="card col-md-4" *ngFor="let movie of movies">
+    <img class="card-img-top" src={{movie.moviePhotos[0]}}>
+    <div class="card-body">
+      <h5 class="card-title">{{movie.name}}</h5>
+      <p class="card-text">{{movie.subject}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">{{movie.year}}</li>
+      <li class="list-group-item">{{movie.genres[0]}}</li>
+      <li class="list-group-item">{{movie.director}}</li>
+    </ul>
+    <div class="card-body">
+      <a href="#" class="card-link" [routerLink]="['/movie', { id: movie.id}]">Details</a>
+      <button href="#" class="card-link" (click)="deleteMovie(movie.id)">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div style="color: red;text-align: center;">
+  {{errorMessage}}
+</div>
