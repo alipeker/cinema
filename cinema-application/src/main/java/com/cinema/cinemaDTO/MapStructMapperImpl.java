@@ -2,51 +2,47 @@ package com.cinema.cinemaDTO;
 
 import org.springframework.stereotype.Component;
 
+import java.util.Set;
+
 @Component
 public class MapStructMapperImpl implements MapStructMapper {
     private String name;
     private String subject;
-    private String[] writers;
+    private Set<String> writers;
     private String director;
     private String cast;
-    private String[] moviePhotos;
+    private Set<String> moviePhotos;
     private String ratingScore;
-    private String[] genres;
+    private Set<String> genres;
     private String duration;
     private String year;
-    private String[] castPhotos;
+    private Set<String> castPhotos;
 
     @Override
-    public MoviePersist movieToPersistMovie(Movie cinema) {
-        MoviePersist cinemaPersist = new MoviePersist();
-        cinemaPersist.setName(cinema.getName());
-        cinemaPersist.setSubject(cinema.getSubject());
-        cinemaPersist.setWriters(cinema.getWriters());
-        cinemaPersist.setDirector(cinema.getDirector());
-        cinemaPersist.setCast(cinema.getCast());
-        cinemaPersist.setMoviePhotos(cinema.getMoviePhotos());
-        cinemaPersist.setRatingScore(cinema.getRatingScore());
-        cinemaPersist.setGenres(cinema.getGenres());
-        cinemaPersist.setDuration(cinema.getDuration());
-        cinemaPersist.setYear(cinema.getYear());
-        cinemaPersist.setCastPhotos(cinema.getCastPhotos());
-        return cinemaPersist;
+    public Movie nonPersistMovieToPersistMovie(NonPersistMovie nonPersistMovie) {
+        Movie movie = new Movie();
+        movie.setName(nonPersistMovie.getName());
+        movie.setSubject(nonPersistMovie.getSubject());
+        movie.setMoviePhotos(nonPersistMovie.getMoviePhotos());
+        movie.setRatingScore(nonPersistMovie.getRatingScore());
+        movie.setGenres(nonPersistMovie.getGenres());
+        movie.setDuration(nonPersistMovie.getDuration());
+        movie.setYear(nonPersistMovie.getYear());
+        movie.setMoviePersons(nonPersistMovie.getMoviePersons());
+        return movie;
     }
 
     @Override
-    public Movie persistMovieToMovie(MoviePersist cinemaPersist) {
-        Movie cinema = new Movie();
-        cinema.setName(cinemaPersist.getName());
-        cinema.setSubject(cinemaPersist.getSubject());
-        cinema.setWriters(cinemaPersist.getWriters());
-        cinema.setDirector(cinemaPersist.getDirector());
-        cinema.setCast(cinemaPersist.getCast());
-        cinema.setMoviePhotos(cinemaPersist.getMoviePhotos());
-        cinema.setRatingScore(cinemaPersist.getRatingScore());
-        cinema.setGenres(cinemaPersist.getGenres());
-        cinema.setDuration(cinemaPersist.getDuration());
-        cinema.setYear(cinemaPersist.getYear());
-        cinema.setCastPhotos(cinemaPersist.getCastPhotos());
-        return cinema;
+    public NonPersistMovie persistMovieToNonPersistMovie(Movie movie) {
+        NonPersistMovie nonPersistMovie = new NonPersistMovie();
+        nonPersistMovie.setName(movie.getName());
+        nonPersistMovie.setSubject(movie.getSubject());
+        nonPersistMovie.setMoviePhotos(movie.getMoviePhotos());
+        nonPersistMovie.setRatingScore(movie.getRatingScore());
+        nonPersistMovie.setGenres(movie.getGenres());
+        nonPersistMovie.setDuration(movie.getDuration());
+        nonPersistMovie.setYear(movie.getYear());
+        nonPersistMovie.setMoviePersons(movie.getMoviePersons());
+        return nonPersistMovie;
     }
 }

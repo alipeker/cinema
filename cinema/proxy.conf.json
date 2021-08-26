@@ -1,6 +1,6 @@
 {
   "/proxy/*": {
-      "target": "http://localhost:8080",
+      "target": "http://localhost:8080/movie",
       "secure": false,
       "changeOrigin": true,
       "logLevel": "debug",

@@ -1,8 +1,8 @@
-.movie-background {
+:host ::ng-deep .movie-background {
   background-color: black;
   filter: blur(8px);
   -webkit-filter: blur(8px);
-  height: 89%;
+  height: 90%;
   width: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -12,18 +12,71 @@
   left: 0px;
 }
 
-.movie-details {
-  position: absolute;
-  z-index: 2;
-  width: 80vh;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.454);
-  text-align: center;
-}
-
-.movieImage{
+:host ::ng-deep .movie-image{
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
-  height: 96vw;
+  background-size: contain;
+  height: 80vh;
+}
+
+:host ::ng-deep .movie-container {
+  background: transparent;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 86vh;
+}
+
+:host ::ng-deep .movie-description {
+  vertical-align: baseline;
+  color: white;
+  background-color: #00000075;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+:host ::ng-deep .rounded-circle {
+  height: 30%;
+  width: 30%;
+}
+
+:host ::ng-deep .movie-cast {
+  position: relative;
+  display: block;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  cursor: s-resize;
+}
+
+:host ::ng-deep .cast-name {
+  margin-left: 0.5rem;
+}
+
+:host ::ng-deep .movie-genres {
+  margin-left: 0.5rem;
+  color: rgba(255,255,255,0.7);
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: .875rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+  letter-spacing: .01786em;
+  text-decoration: inherit;
+  text-transform: capitalize;
+  -webkit-font-smoothing: auto;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0;
+  padding: .25rem .75rem;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  color: var(--ipt-on-baseAlt-color);
+  border-color: rgba(255,255,255,0.64);
+  border-color: rgba(var(--ipt-on-baseAlt-rgb), calc(var(--ipt-baseAlt-pressed-opacity) * 2));
+  margin-right: 0.5rem;
 }

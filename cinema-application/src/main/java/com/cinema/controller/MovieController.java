@@ -1,8 +1,8 @@
 package com.cinema.controller;
 
 import com.cinema.cinemaDTO.Movie;
-import com.cinema.cinemaDTO.MoviePersist;
 import com.cinema.cinemaDTO.MapStructMapper;
+import com.cinema.cinemaDTO.NonPersistMovie;
 import com.cinema.rabbitmq.RabbitMqSender;
 import com.cinema.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("movie")
 public class MovieController {
     @Autowired
     private MovieRepository movieRepository;
@@ -20,20 +21,20 @@ public class MovieController {
     private RabbitMqSender rabbitMqSender;
 
     @GetMapping("/getMovies")
-    public ResponseEntity<Iterable<MoviePersist>> getMovies() {
+    public ResponseEntity<Iterable<Movie>> getMovies() {
         return new ResponseEntity<>(movieRepository.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/getMovie/{id}")
-    public ResponseEntity<MoviePersist> getMovie(@PathVariable("id") Long id) {
-        return new ResponseEntity<MoviePersist>(movieRepository.findById(id).get(), HttpStatus.OK);
+    public ResponseEntity<Movie> getMovie(@PathVariable("id") Long id) {
+        return new ResponseEntity<Movie>(movieRepository.findById(id).get(), HttpStatus.OK);
     }
 
     @PostMapping("/createMovie")
-    public ResponseEntity<MoviePersist> createMovie(@RequestBody Movie movie) throws Exception {
-        MoviePersist savedCinema = movieRepository.save(mapStructMapper.movieToPersistMovie(movie));
-        this.rabbitMqSender.sendToRabbitmq(savedCinema);
-        return new ResponseEntity<>(savedCinema, HttpStatus.CREATED);
+    public ResponseEntity<Movie> createMovie(@RequestBody NonPersistMovie movie) throws Exception {
+        Movie savedMovie = movieRepository.save(mapStructMapper.nonPersistMovieToPersistMovie(movie));
+        this.rabbitMqSender.sendToRabbitmq(savedMovie);
+        return new ResponseEntity<>(savedMovie, HttpStatus.CREATED);
     }
 
     @DeleteMapping(value = "/deleteMovie/{id}")
@@ -47,20 +48,20 @@ public class MovieController {
     }
 
     @PostMapping("/cloneMovie")
-    public ResponseEntity<MoviePersist> cloneMovie(@RequestParam("id") Long id) {
+    public ResponseEntity<Movie> cloneMovie(@RequestParam("id") Long id) {
         try{
-            Movie cinema = mapStructMapper.persistMovieToMovie(movieRepository.findById(id).get());
-            cinema.setId(null);
-            MoviePersist cloneCinema = movieRepository.save(mapStructMapper.movieToPersistMovie(cinema));
-            return new ResponseEntity<MoviePersist>(cloneCinema, HttpStatus.OK);
+            NonPersistMovie nonPersistMovie = mapStructMapper.persistMovieToNonPersistMovie(movieRepository.findById(id).get());
+            nonPersistMovie.setId(null);
+            Movie cloneMovie = movieRepository.save(mapStructMapper.nonPersistMovieToPersistMovie(nonPersistMovie));
+            return new ResponseEntity<Movie>(cloneMovie, HttpStatus.OK);
         } catch (Exception  e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @PutMapping("/updateMovie")
-    public ResponseEntity<MoviePersist> updateMovie(@RequestBody MoviePersist cinema) {
-        MoviePersist updatedMovie = movieRepository.save(cinema);
+    public ResponseEntity<Movie> updateMovie(@RequestBody Movie cinema) {
+        Movie updatedMovie = movieRepository.save(cinema);
         return new ResponseEntity<>(updatedMovie, HttpStatus.OK);
     }
 

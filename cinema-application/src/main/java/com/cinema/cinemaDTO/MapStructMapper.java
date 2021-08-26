@@ -5,6 +5,6 @@ import org.mapstruct.Mapper;
         componentModel = "spring"
 )
 public interface MapStructMapper {
-    MoviePersist movieToPersistMovie(Movie cinema);
-    Movie persistMovieToMovie(MoviePersist cinemaPersist);
+    Movie nonPersistMovieToPersistMovie(NonPersistMovie cinema);
+    NonPersistMovie persistMovieToNonPersistMovie(Movie cinemaPersist);
 }
