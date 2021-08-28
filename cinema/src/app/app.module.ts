@@ -18,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { HomeComponent } from './home/home.component';
   ],
   providers: [
     MovieRestService,
-    RabbitmqService
+    RabbitmqService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

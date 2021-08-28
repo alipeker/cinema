@@ -33,11 +33,12 @@
 
       <div class="card-text">{{ movie.subject }}</div>
 
-      <div class="movie-cast" *ngFor="let cast of movie.cast">
-          <img class="rounded-circle" src={{movie.castPhotos[movie.cast.indexOf(cast)]}}
-          data-holder-rendered="true">
+      <div class="movie-cast" *ngFor="let cast of movie.moviePersons">
+          <img class="rounded-circle" src={{cast.photos[0]}}
+          data-holder-rendered="true" *ngIf="cast.photos.length > 0">
           <span class="cast-name">
-            {{ cast }}
+            {{ cast.name }} {{ cast.surname }}
+            <span>Age: {{ cast.age }}</span>
           </span>
       </div>
 

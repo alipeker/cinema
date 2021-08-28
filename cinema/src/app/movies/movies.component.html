@@ -8,7 +8,6 @@
     <ul class="list-group list-group-flush">
       <li class="list-group-item">{{movie.year}}</li>
       <li class="list-group-item">{{movie.genres[0]}}</li>
-      <li class="list-group-item">{{movie.director}}</li>
     </ul>
     <div class="card-body">
       <a href="#" class="card-link" [routerLink]="['/movie', { id: movie.id}]">Details</a>

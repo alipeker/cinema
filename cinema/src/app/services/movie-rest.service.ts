@@ -13,7 +13,7 @@ export class MovieRestService {
   }
 
   async getMovies(): Promise<Movie[]> {
-    return await this.http.get<Movie[]>("/proxy/getMovies").toPromise().then(
+    return await this.http.get<Movie[]>("/proxy/movie/getMovies").toPromise().then(
       movies => {
         this.movieService.setMovies(movies);
         return movies;
@@ -24,7 +24,7 @@ export class MovieRestService {
   }
 
   async getMovie(movieId: number): Promise<Movie> {
-    return await this.http.get<Movie>("/proxy/getMovie/" + movieId).toPromise().then(
+    return await this.http.get<Movie>("/proxy/movie/getMovie/" + movieId).toPromise().then(
       movie => {
         return movie;
       }
@@ -34,7 +34,7 @@ export class MovieRestService {
   }
 
   async deleteMovie(movieId: number): Promise<Movie[]> {
-    return this.http.delete('/proxy/deleteMovie/' + movieId).toPromise().then(
+    return this.http.delete('/proxy/movie/deleteMovie/' + movieId).toPromise().then(
       movie => {
         this.movieService.delete(movieId);
       }
