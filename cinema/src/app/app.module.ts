@@ -19,6 +19,11 @@ import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { AuthService } from './services/auth.service';
+import { RegisterComponent } from './register/register.component';
+import { authInterceptorProviders } from './helpers/auth.interceptor';
+import { ProfileComponent } from './profile/profile.component';
+import { UploadMovieComponent } from './upload-movie/upload-movie.component';
+import { SecureImagePipe } from './pipes/secure-image.pipe';
 
 @NgModule({
   declarations: [
@@ -31,7 +36,11 @@ import { AuthService } from './services/auth.service';
     MoviesComponent,
     MovieComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    RegisterComponent,
+    ProfileComponent,
+    UploadMovieComponent,
+    SecureImagePipe
   ],
   imports: [
     BrowserModule,
@@ -45,7 +54,8 @@ import { AuthService } from './services/auth.service';
   providers: [
     MovieRestService,
     RabbitmqService,
-    AuthService
+    AuthService,
+    authInterceptorProviders
   ],
   bootstrap: [AppComponent]
 })

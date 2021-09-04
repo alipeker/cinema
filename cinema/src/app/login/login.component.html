@@ -1,23 +1,17 @@
-<div class="container" style="width: 50vw;">
-  <form>
+<form class="form-inline row" *ngIf="!(user.token)">
+  <div class="col-md-2" *ngIf="errorMessage !== ''" style="color: red;font-size: 12px;">
+    {{errorMessage}}
+  </div>
+  <div class="col-md-4">
+    <input #email type="text" class="form-control" value="" size="20" placeholder="Username">
+  </div>
+  <div class="col-md-4 margin-top-login">
+    <input #password type="password" class="form-control" value="" size="20" placeholder="Password">
+  </div>
+  <div class="col-md-2 margin-top-login">
+    <button class="btn btn-light" type="button" (click)="login(email.value, password.value)">Login</button>
+  </div>
+</form>
 
-    <div class="form-group">
-      <label for="user_login">Email</label>
-      <input #email type="text" class="form-control" value="" size="20">
-    </div>
-    <div class="form-group">
-      <label for="user_pass">Password</label>
-      <input #password type="password" class="form-control" value="" size="20">
-    </div>
 
-    <p class="login-remember">
-      <!-- <label><input name="rememberme" type="checkbox" id="rememberme" value="forever"> Remember
-        Me</label> -->
-    </p>
-    <div class="form-group" style="text-align: center;">
-      <input (click)="login(email.value, password.value)" type="button" style="background: #333636;color: white;"
-        class="btn btn-brand btn-block mb-4" value="Login">
-    </div>
-
-  </form>
-</div>
+<button class="btn btn-danger signout" type="button"  *ngIf="user.token" (click)="signOut()">Sign Out</button>

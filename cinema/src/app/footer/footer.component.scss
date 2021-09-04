@@ -7,3 +7,20 @@
   flex-basis: auto;
   align-items: center;
 }
+
+.previous, .next{
+  position: absolute;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+}
+
+.next {
+  right: 40px;
+}
+
+.previous {
+  left: 40px;
+}

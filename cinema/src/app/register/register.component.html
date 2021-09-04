@@ -1,0 +1,29 @@
+<div class="col-md-12">
+    <div class="card card-container">
+        <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
+        <form>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" name="username" #username required
+                    minlength="3" maxlength="20"/>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" name="email" #email required email/>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="password" #password required
+                    minlength="6"/>
+            </div>
+            <div class="form-group" style="text-align: center;margin-top: 24px;">
+                <button class="btn btn-primary btn-block" (click)="onSubmit(username.value, email.value, password.value)">Sign Up</button>
+            </div>
+
+        </form>
+
+        <div class="alert alert-success" *ngIf="isSuccessful">
+            Your registration is successful!
+        </div>
+    </div>
+</div>

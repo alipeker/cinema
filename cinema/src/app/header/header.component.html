@@ -8,16 +8,16 @@
     <div class="collapse navbar-collapse" id="navbarCollapse" [ngbCollapse]="navbarCollapsed">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" routerLink="/movies" routerLinkActive="active">Movies</a>
+          <a class="nav-link" [ngClass]="{'disabled': (user && Object.keys(user).length === 0) }" routerLink="/movies" routerLinkActive="active">Movies</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/link" routerLinkActive="active">Link</a>
+          <a class="nav-link" [ngClass]="{'disabled': (user && Object.keys(user).length === 0)}" routerLink="/profile" routerLinkActive="active">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [ngClass]="{'disabled': (user && Object.keys(user).length === 0)}" routerLink="/upload" routerLinkActive="active">Upload Movie</a>
         </li>
       </ul>
-      <form class="form-inline mt-2 mt-md-0 header-search">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-secondary my-2 my-sm-0 header-search-button" type="submit">Search</button>
-      </form>
+      <app-login class="form-inline mr-sm-2"></app-login>
     </div>
   </nav>
 </header>

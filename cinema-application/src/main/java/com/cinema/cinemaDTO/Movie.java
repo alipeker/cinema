@@ -3,6 +3,7 @@ package com.cinema.cinemaDTO;
 import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Blob;
 import java.util.Set;
 
 @Entity
@@ -32,4 +33,8 @@ public class Movie implements Serializable {
     @ManyToMany(cascade=CascadeType.ALL, targetEntity=MoviePerson.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "movie_id")
     private Set<MoviePerson> moviePersons;
+
+    @Lob
+    private Blob data;
+
 }

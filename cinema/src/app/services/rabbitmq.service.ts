@@ -8,9 +8,7 @@ import { MovieService } from '../store/movie/movie.service';
 export class RabbitmqService {
 
   constructor(private movieService: MovieService) {
-    setTimeout(() => {
-      this.rabbitmqConfig();
-    }, 1000);
+    this.rabbitmqConfig();
   }
 
   rabbitmqConfig(): void {
