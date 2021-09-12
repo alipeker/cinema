@@ -21,6 +21,7 @@ public class MapStructMapperImpl implements MapStructMapper {
     @Override
     public Movie nonPersistMovieToPersistMovie(NonPersistMovie nonPersistMovie) {
         Movie movie = new Movie();
+        movie.setId(nonPersistMovie.getId());
         movie.setName(nonPersistMovie.getName());
         movie.setSubject(nonPersistMovie.getSubject());
         movie.setMoviePhotos(nonPersistMovie.getMoviePhotos());
@@ -29,12 +30,14 @@ public class MapStructMapperImpl implements MapStructMapper {
         movie.setDuration(nonPersistMovie.getDuration());
         movie.setYear(nonPersistMovie.getYear());
         movie.setMoviePersons(nonPersistMovie.getMoviePersons());
+        movie.setUserRatings(nonPersistMovie.getUserRatings());
         return movie;
     }
 
     @Override
     public NonPersistMovie persistMovieToNonPersistMovie(Movie movie) {
         NonPersistMovie nonPersistMovie = new NonPersistMovie();
+        nonPersistMovie.setId(movie.getId());
         nonPersistMovie.setName(movie.getName());
         nonPersistMovie.setSubject(movie.getSubject());
         nonPersistMovie.setMoviePhotos(movie.getMoviePhotos());
@@ -43,6 +46,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         nonPersistMovie.setDuration(movie.getDuration());
         nonPersistMovie.setYear(movie.getYear());
         nonPersistMovie.setMoviePersons(movie.getMoviePersons());
+        nonPersistMovie.setUserRatings(movie.getUserRatings());
         return nonPersistMovie;
     }
 }

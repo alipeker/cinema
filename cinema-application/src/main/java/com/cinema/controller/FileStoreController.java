@@ -1,49 +1,41 @@
 package com.cinema.controller;
 
-import com.cinema.cinemaDTO.StreamingFileRecord;
-import com.cinema.repository.StreamingFileRepository;
-import com.cinema.uploadingfiles.LobHelper;
+import com.cinema.cinemaDTO.FileResponse;
+import com.cinema.uploadingfiles.FileSystemStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.sql.SQLException;
-import javax.servlet.http.HttpServletResponse;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("file")
 public class FileStoreController {
 
-    private final StreamingFileRepository streamingFileRepository;
-    private final LobHelper lobCreator;
-
     @Autowired
-    public FileStoreController(StreamingFileRepository streamingFileRepository, LobHelper lobCreator) {
-        this.streamingFileRepository = streamingFileRepository;
-        this.lobCreator = lobCreator;
+    private FileSystemStorageService storageService;
+
+    @GetMapping(value= "/uploads/{filename:.+}", produces = MediaType.IMAGE_JPEG_VALUE)
+    @ResponseBody
+    public ResponseEntity<Resource> downloadFile(@PathVariable String filename) {
+        Resource resource = storageService.loadAsResource(filename);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment; filename=\"" + resource.getFilename() + "\"")
+                .body(resource);
     }
 
-    @RequestMapping(value = "/blobs", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> store(@RequestParam("file") MultipartFile multipartFile) throws IOException, SQLException, URISyntaxException {
-        StreamingFileRecord streamingFileRecord = new StreamingFileRecord(multipartFile.getOriginalFilename(), lobCreator.createBlob(multipartFile.getInputStream(), multipartFile.getSize()));
+    @PostMapping("/uploadImage")
+    @ResponseBody
+    public FileResponse uploadFile(@RequestParam("file") MultipartFile file) {
+        String filename = UUID.randomUUID().toString()+".png";
+        String name = storageService.store(file, filename);
 
-        streamingFileRecord = streamingFileRepository.save(streamingFileRecord);
-
-        return ResponseEntity.created(new URI("http://localhost:8080/blobs/" + streamingFileRecord.getId())).build();
-    }
-
-    @RequestMapping(value = "/blobs/{id}", method = RequestMethod.GET)
-    public void load(@PathVariable("id") long id, HttpServletResponse response) throws SQLException, IOException {
-        StreamingFileRecord record = streamingFileRepository.findById(id).get();
-        IOUtils.copy(record.getData().getBinaryStream(), response.getOutputStream());
-        response.getOutputStream().flush();
+        return new FileResponse(name, "/img/"+filename, file.getContentType(), file.getSize());
     }
 
 }

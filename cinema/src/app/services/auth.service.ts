@@ -1,17 +1,12 @@
 import { User } from '../data/user.model';
 import { TokenStorageService } from './token-storage.service';
-import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { ERole } from '../store/movie/movie.model';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-}
-
-export enum ERole {
-  ROLE_USER,
-  ROLE_MODERATOR,
-  ROLE_ADMIN
 }
 
 @Injectable({

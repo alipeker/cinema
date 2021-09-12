@@ -1,6 +1,7 @@
 package com.cinema.rabbitmq;
 
-import com.cinema.cinemaDTO.Movie;
+import com.cinema.cinemaDTO.Operation;
+import com.cinema.cinemaDTO.RabbitmqObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.amqp.rabbit.core.RabbitMessagingTemplate;
@@ -17,10 +18,11 @@ public class RabbitMqSender {
     @Autowired
     private MappingJackson2MessageConverter mappingJackson2MessageConverter;
 
-    public void sendToRabbitmq(Movie movie) {
+    public void sendToRabbitmq(Operation operation, Object movie) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            this.rabbitMessagingTemplate.convertAndSend("cinema", "frame", mapper.writeValueAsString(movie));
+            RabbitmqObject rabbitmqObject = new RabbitmqObject(operation, movie);
+            this.rabbitMessagingTemplate.convertAndSend("cinema", "frame", mapper.writeValueAsString(rabbitmqObject));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MovieRestService } from './../services/movie-rest.service';
 import { Component, OnInit } from '@angular/core';
@@ -18,7 +19,7 @@ export class MoviesComponent implements OnInit {
   ngOnInit(): void {
     this.movieQuery.selectAll().subscribe(movies => {
       this.movies = movies;
-    })
+    });
   }
 
   getMovies(): void {
@@ -31,7 +32,12 @@ export class MoviesComponent implements OnInit {
     });
   }
 
-  deleteMovie(movieId: number) {
-    this.moviesRestService.deleteMovie(movieId)
+  async deleteMovie(movieId: number) {
+    await this.moviesRestService.deleteMovie(movieId);
   }
+
+  getSource(name: string) {
+    return environment.imageEndpoint + name;
+  }
+
 }

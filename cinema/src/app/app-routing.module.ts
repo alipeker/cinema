@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: 'movies', component: MoviesComponent, canActivate: [AuthGuard] },
   { path: 'movie', component: MovieComponent , canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent , canActivate: [AuthGuard]},
-  { path: 'upload', component: UploadMovieComponent , canActivate: [AuthGuard]}
+  { path: 'upload', component: UploadMovieComponent , canActivate: [AuthGuard]},
+  { path: 'update', component: UploadMovieComponent , canActivate: [AuthGuard]}
 ];
 
 @NgModule({

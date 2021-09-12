@@ -1,40 +1,57 @@
 <div class="col-md-12">
     <div class="card card-container">
-        <!-- <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" /> -->
         <form [formGroup]="movieForm">
-            <div class="form-group">
-                <label for="mname">Name</label>
-                <input type="text" class="form-control" formControlName="mname" #mname required minlength="3" maxlength="20" />
+            <div class="form-group" style="text-align: center;">
+                <img [src]="uploadedImageUrl" class="uploadImage"/>
             </div>
             <div class="form-group">
-                <label for="mdescription">Subject</label>
-                <textarea type="text" class="form-control" formControlName="mdescription" #mdescription required> </textarea>
+                <input type="text" formControlName="moviePhotos" #moviePhoto style="display: none;" />
+                <input type="file" class="custom-file-input" (change)="uploadImage()" #moviePhotoFile
+                    name="image" accept="image/png, image/jpeg">
+                <label class="custom-file-label" for="moviePhotoFile">Choose file</label>
             </div>
             <div class="form-group">
-                <label for="mduration">Duration</label>
-                <input type="text" class="form-control" formControlName="mduration" #mduration required minlength="6" />
+                <label for="name">Name</label>
+                <input type="text" class="form-control" formControlName="name" #name required minlength="3"
+                    maxlength="20" value={{movie.name}}/>
             </div>
             <div class="form-group">
-                <label for="myear">Year</label>
-                <input type="number" class="form-control" formControlName="myear" #myear required minlength="6" />
+                <label for="subject">Subject</label>
+                <textarea type="text" class="form-control" formControlName="subject" #subject
+                    required value={{movie.subject}}></textarea>
             </div>
             <div class="form-group">
-                <label for="mgenres">Genres</label>
-                <input type="text" class="form-control" formControlName="mgenres" #mgenres required minlength="6" />
+                <label for="duration">Duration</label>
+                <input type="text" class="form-control" formControlName="duration" #duration required minlength="6" 
+                value={{movie.duration}}/>
             </div>
             <div class="form-group">
-                    <input type="file" class="custom-file-input" (change)="uploadImage()" formControlName="moviePhoto" name="image" accept="image/png, image/jpeg" #moviePhoto>
-                    <label class="custom-file-label" for="moviePhoto">Choose file</label>
+                <label for="year">Year</label>
+                <input type="number" class="form-control" formControlName="year" #year required minlength="6" 
+                value={{movie.year}}/>
             </div>
             <div class="form-group">
-                <label for="mrating">Rating Score</label>
-                <input type="number" class="form-control" formControlName="mrating" #mrating required minlength="6"/>
+                <label for="genres">Genres</label>
+                <input type="text" class="form-control" formControlName="genres" #genres required minlength="6" 
+                value={{movie.genres}}/>
+            </div>
+            <div class="form-group">
+                <label for="ratingScore">Rating Score</label>
+                <input type="number" class="form-control" formControlName="ratingScore" #ratingScore required minlength="6" 
+                value={{movie.ratingScore}}/>
             </div>
             <div class="form-group" style="text-align: center;">
-                <button class="btn btn-primary" style="background: linear-gradient(to right, #0d6efd, #6a9be3fc);" type="button" (click)="uploadMovie()">Upload</button>
+                <button class="btn btn-primary" style="background: linear-gradient(to right, #0d6efd, #6a9be3fc);"
+                    type="button" (click)="createUpdateMovie()">
+                    Upload
+                </button>
             </div>
         </form>
     </div>
+    <div style="text-align: center;margin-top: 20px;">
+        <h5 style="color: red;" *ngIf="errorMessage !== ''">{{errorMessage}}</h5>
+        <h5 style="color: green;" *ngIf="successMessage !== ''">{{successMessage}}</h5>
+    </div>
+    
 </div>
 
-<img src={{uploadedImage}}/>

@@ -24,6 +24,8 @@ import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { ProfileComponent } from './profile/profile.component';
 import { UploadMovieComponent } from './upload-movie/upload-movie.component';
 import { SecureImagePipe } from './pipes/secure-image.pipe';
+import { UserCommentComponent } from './user-comment/user-comment.component';
+import { UserRatingComponent } from './user-rating/user-rating.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { SecureImagePipe } from './pipes/secure-image.pipe';
     RegisterComponent,
     ProfileComponent,
     UploadMovieComponent,
-    SecureImagePipe
+    SecureImagePipe,
+    UserCommentComponent,
+    UserRatingComponent
   ],
   imports: [
     BrowserModule,

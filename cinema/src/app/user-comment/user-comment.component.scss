@@ -1,0 +1,13 @@
+:host ::ng-deep .user-comment {
+    width: 99%;
+    color: white;
+    background: transparent;
+    white-space: nowrap;
+    overflow-y: hidden;
+    text-overflow: clip;
+    overflow-x: hidden;
+}
+
+:host ::ng-deep .card-text {
+    white-space: break-spaces;
+}

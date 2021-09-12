@@ -1,7 +1,6 @@
 @media screen and (min-width:768px) {
     .form-inline{
         position: absolute;
-        right: 8px;
         top: 10px;
     }
 
@@ -10,11 +9,25 @@
         right: 8px;
         top: 10px;
         background: linear-gradient(to right, #ee5a6f, #f29263);
+        background: -webkit-linear-gradient(to right, #ee5a6f, #f29263);
+        background: -webkit-gradient(to right, #ee5a6f, #f29263);
+        background: -ms-linear-gradient(to right, #ee5a6f, #f29263);
+    }
+
+    .login-attribute{
+        padding-left: 10px;
     }
 }
-
+    
 @media screen and (max-width:767px) {
     .margin-top-login{
         margin-top: 10px;
+    }
+
+    .signout{
+        background: linear-gradient(to right, #ee5a6f, #f29263);
+        background: -webkit-linear-gradient(to right, #ee5a6f, #f29263);
+        background: -webkit-gradient(to right, #ee5a6f, #f29263);
+        background: -ms-linear-gradient(to right, #ee5a6f, #f29263);
     }
 }

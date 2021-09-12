@@ -1,8 +1,8 @@
+import { UserRating } from './../store/movie/movie.model';
 import { MovieService } from './../store/movie/movie.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Movie } from '../store/movie/movie.model';
-import { FileResponse } from '../data/file-response.data';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +27,7 @@ export class MovieRestService {
   async getMovie(movieId: number): Promise<Movie> {
     return await this.http.get<Movie>("/proxy/movie/getMovie/" + movieId).toPromise().then(
       movie => {
+        movie.moviePhotos[0] = movie.moviePhotos[0];
         return movie;
       }
     ).catch(error => {
@@ -35,9 +36,8 @@ export class MovieRestService {
   }
 
   async deleteMovie(movieId: number): Promise<Movie[]> {
-    return this.http.delete('/proxy/movie/deleteMovie/' + movieId).toPromise().then(
+    return await this.http.delete('/proxy/movie/deleteMovie/' + movieId).toPromise().then(
       movie => {
-        this.movieService.delete(movieId);
       }
     ).catch(error => {
       return error;
@@ -51,16 +51,19 @@ export class MovieRestService {
     let headers = new HttpHeaders();
        headers = headers.append('enctype', 'multipart/form-data');
    
-    return this.http
-        .post<any>('/proxy/file/blobs/', formData, {headers}).toPromise();
+    return await this.http
+        .post<any>('/proxy/file/uploadImage/', formData, {headers}).toPromise();
   }
 
-  async getMovieImage(name: string): Promise<any> {
-    return await this.http.get<any>("/proxy/file/blobs/253").toPromise();
+  async createMovie(movie: Movie): Promise<Movie[]> {
+    return await this.http.post<Movie[]>('/proxy/movie/createMovie/', movie).toPromise();
   }
 
-  arrayBufferToBase64(buffer: ArrayBuffer) {
-    return btoa(String.fromCharCode(...new Uint8Array(buffer)));
+  async updateMovie(movie: Movie): Promise<Movie[]> {
+    return await this.http.put<Movie[]>('/proxy/movie/updateMovie/', movie).toPromise();
   }
 
+  async submitComment(userRating: UserRating, movieId: number): Promise<any> {
+    return await this.http.post<any>('/proxy/movie/rating/' + movieId, userRating).toPromise();
+  }
 }

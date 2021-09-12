@@ -1,0 +1,6 @@
+<div class="movie-rating-star-container">
+    <span class="movie-rating-star" *ngFor="let rate of ratingScores" (click)="changeSelectedRate(rate)"
+    [ngStyle]="{'background-color': ratingScore >= rate ? 'rgb(245, 197, 24)' : 'white'}">
+    </span>
+    <span>{{ratingScore}} / 10</span>
+</div>

@@ -31,13 +31,16 @@
   vertical-align: baseline;
   color: white;
   background-color: #00000075;
-  overflow-y: auto;
+  white-space: nowrap;
+  overflow-y: hidden;
+  text-overflow: clip;
   overflow-x: hidden;
+  height: 100%;
 }
 
 :host ::ng-deep .rounded-circle {
-  height: 30%;
-  width: 30%;
+  height: 20%;
+  width: 20%;
 }
 
 :host ::ng-deep .movie-cast {
@@ -80,4 +83,33 @@
   border-color: rgba(255,255,255,0.64);
   border-color: rgba(var(--ipt-on-baseAlt-rgb), calc(var(--ipt-baseAlt-pressed-opacity) * 2));
   margin-right: 0.5rem;
+}
+
+:host ::ng-deep .user-rating {
+  height: 20%;
+  white-space: nowrap;
+  overflow-y: auto;
+  text-overflow: clip;
+  overflow-x: hidden;
+  width: 104%;
+}
+
+:host ::ng-deep .user-comment {
+  margin-top: 4px;
+}
+
+:host ::ng-deep .user-comment > textarea{
+  height: 90px;
+}
+
+:host ::ng-deep .user-comment > app-user-rating > div{
+  cursor: pointer;
+}
+
+:host ::ng-deep .user-comment > .card-body{
+  padding: 0rem 0rem;
+}
+
+:host ::ng-deep app-user-comment > div{
+  border: 0.1px solid #ffffff70;
 }

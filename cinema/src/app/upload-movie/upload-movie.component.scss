@@ -5,3 +5,28 @@
 .form-group {
     margin-top: 10px;
 }
+
+@media screen and (max-width:690px) {
+    :host .uploadImage{
+        width: 50vw;
+    }
+}
+
+@media screen and (min-width:690px) and (max-width: 870px){
+    :host .uploadImage{
+        width: 40vw;
+    }
+}
+
+@media screen and (min-width:870px) and (max-width: 1160px){
+    :host .uploadImage{
+        width: 30vw;
+    }
+}
+
+@media screen and (min-width:1160px){
+    :host .uploadImage{
+        width: 25vw;
+    }
+}
+

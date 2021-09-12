@@ -1,7 +1,6 @@
 package com.cinema.security.jwt;
 
 import java.util.Date;
-
 import com.cinema.security.services.UserDetailsImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

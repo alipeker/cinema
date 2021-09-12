@@ -1,6 +1,6 @@
 <div class="row">
   <div class="card col-md-4" *ngFor="let movie of movies">
-    <img class="card-img-top" src={{movie.moviePhotos[0]}}>
+    <img class="card-img-top" src={{getSource(movie.moviePhotos[0])}}>
     <div class="card-body">
       <h5 class="card-title">{{movie.name}}</h5>
       <p class="card-text">{{movie.subject}}</p>
@@ -10,8 +10,9 @@
       <li class="list-group-item">{{movie.genres[0]}}</li>
     </ul>
     <div class="card-body">
-      <a href="#" class="card-link" [routerLink]="['/movie', { id: movie.id}]">Details</a>
-      <button href="#" class="card-link" (click)="deleteMovie(movie.id)">Delete</button>
+      <button class="card-link btn btn-outline-dark" [routerLink]="['/movie', { id: movie.id}]">Details</button>
+      <button class="card-lin btn btn-outline-success" [routerLink]="['/update', { id: movie.id}]">Update</button>
+      <button class="card-link btn btn-outline-danger" (click)="deleteMovie(movie.id)">Delete</button>
     </div>
   </div>
 </div>
