@@ -26,6 +26,7 @@ import { UploadMovieComponent } from './upload-movie/upload-movie.component';
 import { SecureImagePipe } from './pipes/secure-image.pipe';
 import { UserCommentComponent } from './user-comment/user-comment.component';
 import { UserRatingComponent } from './user-rating/user-rating.component';
+import { MostRatingMoviesComponent } from './most-rating-movies/most-rating-movies.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { UserRatingComponent } from './user-rating/user-rating.component';
     UploadMovieComponent,
     SecureImagePipe,
     UserCommentComponent,
-    UserRatingComponent
+    UserRatingComponent,
+    MostRatingMoviesComponent
   ],
   imports: [
     BrowserModule,

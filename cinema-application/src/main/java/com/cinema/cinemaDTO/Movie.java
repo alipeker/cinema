@@ -33,31 +33,35 @@ public class Movie implements Serializable {
     @JoinColumn(name = "movie_id")
     private Set<MoviePerson> moviePersons;
 
-    @ManyToMany(cascade=CascadeType.ALL, targetEntity=UserRating.class, fetch = FetchType.EAGER)
+    @OneToMany(cascade=CascadeType.ALL, targetEntity=UserRating.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_movie_id")
     private Set<UserRating> userRatings;
 
+    private double userRating = 0;
+
     public void addUserRating(UserRating userRating) {
         this.userRatings.add(userRating);
+        this.calculateMovieRating();
     }
 
-    public void deleteUserRating(Long userRatingId) {
-        this.userRatings.stream().filter(userRating -> {
-            if(userRatingId.equals(userRating.getId())){
-                return this.userRatings.remove(userRating);
-            }
-            return false;
-        });
+    public void deleteUserRating(String userRatingId) {
+        this.userRatings.removeIf(userRate -> userRate.getId().equals(userRatingId));
+        this.calculateMovieRating();
     }
 
     public void updateUserRating(UserRating userRating) {
-        this.userRatings.stream().filter(userRating1 -> {
-            userRating1.setComment("degisti");
-            return false;
-        });
+        this.deleteUserRating(userRating.getId());
+        this.addUserRating(userRating);
+        this.calculateMovieRating();
     }
 
-    public void getUserRatingById(UserRating userRating) {
-        this.userRatings.add(userRating);
+    public UserRating getUserRatingById(String userRatingId) {
+        return this.userRatings.stream().filter(userRating -> {
+            return userRating.getId().equals(userRatingId);
+        }).findFirst().get();
+    }
+
+    private void calculateMovieRating() {
+        this.userRating = this.userRatings.stream().mapToInt(userRating1 -> userRating1.getRating()).average().orElse(0);
     }
 }

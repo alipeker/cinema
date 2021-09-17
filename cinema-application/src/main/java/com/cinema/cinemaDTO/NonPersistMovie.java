@@ -17,4 +17,5 @@ public class NonPersistMovie implements Serializable {
     private String year;
     private Set<MoviePerson> moviePersons;
     private Set<UserRating> userRatings;
+    private double userRating;
 }

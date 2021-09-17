@@ -31,6 +31,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         movie.setYear(nonPersistMovie.getYear());
         movie.setMoviePersons(nonPersistMovie.getMoviePersons());
         movie.setUserRatings(nonPersistMovie.getUserRatings());
+        movie.setUserRating(nonPersistMovie.getUserRating());
         return movie;
     }
 
@@ -47,6 +48,7 @@ public class MapStructMapperImpl implements MapStructMapper {
         nonPersistMovie.setYear(movie.getYear());
         nonPersistMovie.setMoviePersons(movie.getMoviePersons());
         nonPersistMovie.setUserRatings(movie.getUserRatings());
+        nonPersistMovie.setUserRating(movie.getUserRating());
         return nonPersistMovie;
     }
 }

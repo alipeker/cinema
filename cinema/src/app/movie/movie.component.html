@@ -1,6 +1,5 @@
 <div *ngIf="movie" class="movie-background" id="movie-background"
   [ngStyle]="{'background-image': 'url(' + imageEndpoint + movie.moviePhotos[0]}">
-
 </div>
 
 <div class="movie-container" *ngIf="movie">
@@ -19,7 +18,7 @@
       <div class="movie-image" [ngStyle]="{'background-image': 'url(' + imageEndpoint + movie.moviePhotos[0]}"></div>
     </div>
     <div class="col-md-4 movie-description">
-      <div style="height: 55%; overflow-y: auto;">
+      <div style="height: 51%; overflow-y: auto;">
         <div class="card-title" style="position: relative;margin-bottom: 0rem;">
           <div style="display: flex;">
             <h4>{{ movie.name }}</h4>
@@ -43,16 +42,19 @@
             </span>
         </div>
       </div>
+      <button class="btn btn-dark btn-sm" (click)="createNewUserRating()">New Comment</button>
       <div class="user-rating">
-        <app-user-comment *ngFor="let comment of movie.userRatings" [userRating]="comment"></app-user-comment>
+        <app-user-comment #userRatings *ngFor="let comment of movie.userRatings" [userRating]="comment"
+        (editUserRatingEvent)="editUserRating(userRatings.userRating)" [movieId] = "movie.id"></app-user-comment>
       </div>
       <div class="user-comment">
-        <app-user-rating [static]="false" #userRating></app-user-rating>
+        <div *ngIf="error !== ''" class="movie-comment">{{error}}</div>
+        <app-user-rating [static]="false" #userRating [ratingScore]="selectedUserRating.rating"></app-user-rating>
         <br>
-        <textarea style="width: 100%;" #userComment></textarea>
+        <textarea style="width: 100%;" #userComment [value]="selectedUserRating.comment"></textarea>
         <br>
         <div style="text-align: center;">
-          <button class="btn btn-primary" (click)="submitComment(userRating.ratingScore, userComment.value)">Submit</button>
+          <button class="btn btn-dark" (click)="submitComment(userRating.ratingScore, userComment.value)">Submit</button>
         </div>
       </div>
     </div>

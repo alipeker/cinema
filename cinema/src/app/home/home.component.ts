@@ -1,3 +1,4 @@
+import { MovieRestService } from './../services/movie-rest.service';
 import { TokenStorageService } from './../services/token-storage.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../data/user.model';
@@ -12,7 +13,8 @@ export class HomeComponent implements OnInit {
   Object = Object;
   user: User;
 
-  constructor(private tokenStorage: TokenStorageService, private authService: AuthService) {
+  constructor(private tokenStorage: TokenStorageService, private authService: AuthService,
+    private moviesRestService: MovieRestService) {
     this.user = this.tokenStorage.getUser();
   }
 

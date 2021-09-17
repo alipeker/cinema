@@ -20,6 +20,8 @@ export class MoviesComponent implements OnInit {
     this.movieQuery.selectAll().subscribe(movies => {
       this.movies = movies;
     });
+
+    this.getMovies();
   }
 
   getMovies(): void {

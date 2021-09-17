@@ -15,11 +15,14 @@ public class UserRating {
     @Column(name = "CHAPTER_CODE", nullable = false,  length = 10000)
     private String comment;
 
+    @Column
+    private String date;
+
     @Min(value = 1)
     @Max(value = 10)
     private int rating;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
     private User user;
 
     public UserRating() {

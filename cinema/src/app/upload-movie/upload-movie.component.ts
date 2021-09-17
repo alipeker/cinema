@@ -21,7 +21,7 @@ export class UploadMovieComponent implements OnInit {
   @ViewChild('moviePhotoFile', {static: true}) moviePhotoFile: ElementRef;
   movieForm: FormGroup;
   uploadedImageUrl = "";
-  movie: Movie = new Movie(0, '', '', [], '', [], '', '', [], []);
+  movie: Movie = new Movie(0, '', '', [], '', [], '', '', [], [], 0);
   mode: UPLOADMODE = UPLOADMODE.CREATE;
   errorMessage = "";
   successMessage = "";

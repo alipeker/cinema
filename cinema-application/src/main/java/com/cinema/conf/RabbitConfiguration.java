@@ -18,6 +18,11 @@ public class RabbitConfiguration {
     }
 
     @Bean
+    Queue queueMessage2() {
+        return new Queue("userrating", true);
+    }
+
+    @Bean
     DirectExchange exchange() {
             return new DirectExchange("cinema");
     }
@@ -25,6 +30,11 @@ public class RabbitConfiguration {
     @Bean
     Binding bindingExchangeMessage(Queue queueMessage, DirectExchange exchange) {
         return BindingBuilder.bind(queueMessage).to(exchange).with("frame");
+    }
+
+    @Bean
+    Binding bindingExchangeMessage2(Queue queueMessage2, DirectExchange exchange) {
+        return BindingBuilder.bind(queueMessage2).to(exchange).with("userRatingFrame");
     }
 
     @Bean

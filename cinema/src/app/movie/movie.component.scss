@@ -113,3 +113,8 @@
 :host ::ng-deep app-user-comment > div{
   border: 0.1px solid #ffffff70;
 }
+
+:host ::ng-deep .movie-comment{
+  color: red;
+  font-size: 12px;
+}

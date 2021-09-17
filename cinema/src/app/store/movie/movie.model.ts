@@ -1,3 +1,4 @@
+import { RabbitmqObject } from './../../data/rabbitmq-object.data';
 import { User } from '../../data/user.model';
 
 export class Movie {
@@ -11,11 +12,12 @@ export class Movie {
   year: string = "";
   moviePersons: MoviePerson[] = [];
   userRatings: UserRating[] = [];
+  userRating: number;
 
   constructor(id: number, name: string, subject: string = "",
   moviePhotos: string[], ratingScore: string,
   genres: string[], duration: string, year: string, moviePersons: MoviePerson[],
-  userRatings: UserRating[]) {
+  userRatings: UserRating[], userRating: number) {
     this.id = id;
     this.name = name;
     this.subject = subject;
@@ -26,6 +28,7 @@ export class Movie {
     this.year = year;
     this.moviePersons = moviePersons;
     this.userRatings = userRatings;
+    this.userRating = userRating
   }
 
 }
@@ -57,18 +60,31 @@ export class MoviePerson extends Person{
 }
 
 export class UserRating {
-  id: number;
+  id: string | null;
   comment: string;
   rating: number;
   user: User;
+  date: string;
 
-  constructor(id: number, comment: string, rating: number, user: User) {
+  constructor(id: string | null, comment: string, rating: number, user: User, date: string) {
     this.id = id;
     this.comment = comment;
     this.rating = rating;
     this.user = user;
+    this.date = date;
   }
 }
+
+export class UserRatingRabbitmq {
+  rabbitmqObject: RabbitmqObject;
+  movieid: number;
+
+  constructor(rabbitmqObject: RabbitmqObject, movieid: number) {
+    this.movieid = movieid;
+    this.rabbitmqObject = rabbitmqObject;
+  }
+}
+
 
 export enum ERole {
   ROLE_USER,

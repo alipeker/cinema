@@ -11,8 +11,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 
 @RestController
@@ -47,7 +52,7 @@ public class MovieController {
     @PostMapping("/createMovie")
     public ResponseEntity<Movie> createMovie(@RequestBody NonPersistMovie movie) throws Exception {
         Movie savedMovie = movieRepository.save(mapStructMapper.nonPersistMovieToPersistMovie(movie));
-        this.rabbitMqSender.sendToRabbitmq(Operation.CREATE, savedMovie);
+        this.rabbitMqSender.sendToRabbitmqMovie(Operation.CREATE, savedMovie);
         return new ResponseEntity<>(savedMovie, HttpStatus.CREATED);
     }
 
@@ -55,7 +60,7 @@ public class MovieController {
     public ResponseEntity<HttpStatus> deleteMovie(@PathVariable("id") Long id) {
         try{
             movieRepository.delete(movieRepository.findById(id).get());
-            this.rabbitMqSender.sendToRabbitmq(Operation.DELETE, id);
+            this.rabbitMqSender.sendToRabbitmqMovie(Operation.DELETE, id);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception  e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -77,7 +82,7 @@ public class MovieController {
     @PutMapping("/updateMovie")
     public ResponseEntity<Movie> updateMovie(@RequestBody Movie cinema) {
         Movie updatedMovie = movieRepository.save(cinema);
-        this.rabbitMqSender.sendToRabbitmq(Operation.UPDATE, mapStructMapper.persistMovieToNonPersistMovie(updatedMovie));
+        this.rabbitMqSender.sendToRabbitmqMovie(Operation.UPDATE, mapStructMapper.persistMovieToNonPersistMovie(updatedMovie));
         return new ResponseEntity<>(updatedMovie, HttpStatus.OK);
     }
 
@@ -105,10 +110,12 @@ public class MovieController {
     @ResponseBody
     public ResponseEntity createMovieRating(@RequestBody UserRating userRating, @PathVariable("id") Long id) {
         Movie movie = movieRepository.findById(id).get();
+        String currentDate = new SimpleDateFormat("HH.mm dd.MM.yyyy").format(new Date());
+        userRating.setDate((currentDate));
         movie.addUserRating(userRating);
         try {
             movieRepository.save(movie);
-            this.rabbitMqSender.sendToRabbitmq(Operation.CREATE, userRating);
+            this.rabbitMqSender.sendToRabbitmqComment(Operation.CREATE, movie.getUserRatingById(userRating.getId()), id);
         } catch (InvalidDataAccessApiUsageException e) {
             return new ResponseEntity<String>(e.getMessage().toString(), HttpStatus.NOT_ACCEPTABLE);
         } catch (Exception e) {
@@ -117,24 +124,33 @@ public class MovieController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/rating/{id}")
-    @ResponseBody
-    public ResponseEntity deleteMovieRating(@RequestBody Long userRatingId, @PathVariable("id") Long id) {
-        Movie movie = movieRepository.findById(id).get();
-        movie.deleteUserRating(userRatingId);
-        movieRepository.save(movie);
-        this.rabbitMqSender.sendToRabbitmq(Operation.DELETE, userRatingId);
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
+    @PreAuthorize("isMemberHas(#userRating, authentication.principal.username)")
     @PutMapping("/rating/{id}")
     @ResponseBody
     public ResponseEntity updateMovieRating(@RequestBody UserRating userRating, @PathVariable("id") Long id) {
         Movie movie = movieRepository.findById(id).get();
+        String currentDate = new SimpleDateFormat("HH.mm dd.MM.yyyy").format(new Date());
+        userRating.setDate(currentDate);
         movie.updateUserRating(userRating);
         movieRepository.save(movie);
-        this.rabbitMqSender.sendToRabbitmq(Operation.UPDATE, userRating);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        this.rabbitMqSender.sendToRabbitmqComment(Operation.UPDATE, userRating, id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PreAuthorize("isMemberHas(#userRating, authentication.principal.username)")
+    @DeleteMapping("/rating/{id}")
+    @ResponseBody
+    public ResponseEntity deleteMovieRating(@RequestBody UserRating userRating, @PathVariable("id") Long id) {
+        Movie movie = movieRepository.findById(id).get();
+        movie.deleteUserRating(userRating.getId());
+        movieRepository.save(movie);
+        this.rabbitMqSender.sendToRabbitmqComment(Operation.DELETE, userRating, id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/getMostRatingMovies")
+    public ResponseEntity<Set<Movie>> getMostRatingMovies() {
+        return new ResponseEntity<>(movieRepository.getMostRatingMovies(), HttpStatus.OK);
     }
 
 }

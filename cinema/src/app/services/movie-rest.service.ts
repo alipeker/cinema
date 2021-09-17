@@ -3,6 +3,7 @@ import { MovieService } from './../store/movie/movie.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Movie } from '../store/movie/movie.model';
+import { v4 as uuid } from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -64,6 +65,19 @@ export class MovieRestService {
   }
 
   async submitComment(userRating: UserRating, movieId: number): Promise<any> {
-    return await this.http.post<any>('/proxy/movie/rating/' + movieId, userRating).toPromise();
+    if(!userRating.id) {
+      userRating.id = uuid();
+      return await this.http.post<any>('/proxy/movie/rating/' + movieId, userRating).toPromise();
+    }
+    return await this.http.put<any>('/proxy/movie/rating/' + movieId, userRating).toPromise();
   }
+
+  async deleteComment(userRating: UserRating, movieId: number): Promise<any> {
+    return await this.http.request<any>('delete', '/proxy/movie/rating/' + movieId, {body: userRating}).toPromise();
+  }
+
+  async getMostRatingMovies(): Promise<Movie[]> {
+    return await this.http.get<Movie[]>("/proxy/movie/getMostRatingMovies").toPromise();
+  }
+
 }

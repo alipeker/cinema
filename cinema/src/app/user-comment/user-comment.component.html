@@ -1,6 +1,12 @@
 <div class="card user-comment">
     <div class="card-body">
-        <app-user-rating></app-user-rating>
-        <div class="card-text">{{userRating.comment}} </div>
+        <app-user-rating [ratingScore]="userRating.rating"></app-user-rating>
+        <h5 class="card-title">{{userRating.user.username}}</h5>
+        <div class="card-subtitle mb-2" style="color:#babfc3;">{{userRating.date}}</div>
+        <div class="card-text">{{userRating.comment}}</div>
+        <button class="btn btn-success btn-sm" style="margin-top: 10px;"
+        (click)="editComment()" [hidden]="!isUserHasThisRating()">Edit</button>
+        <button class="btn btn-danger btn-sm" style="margin-top: 10px;"
+        (click)="deleteComment()" [hidden]="!isUserHasThisRating()">Delete</button>
     </div>
 </div>
