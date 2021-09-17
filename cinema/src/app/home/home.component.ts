@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   user: User;
 
   constructor(private tokenStorage: TokenStorageService, private authService: AuthService,
-    private moviesRestService: MovieRestService) {
+              private moviesRestService: MovieRestService) {
     this.user = this.tokenStorage.getUser();
   }
 

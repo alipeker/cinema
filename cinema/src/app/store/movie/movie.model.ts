@@ -3,18 +3,18 @@ import { User } from '../../data/user.model';
 
 export class Movie {
   id: number;
-  name: string = "";
-  subject: string = "";
+  name: string = '';
+  subject: string = '';
   moviePhotos: string[] = [];
-  ratingScore: string = "";
+  ratingScore: string = '';
   genres: string[] = [];
-  duration: string = "";
-  year: string = "";
+  duration: string = '';
+  year: string = '';
   moviePersons: MoviePerson[] = [];
   userRatings: UserRating[] = [];
   userRating: number;
 
-  constructor(id: number, name: string, subject: string = "",
+  constructor(id: number, name: string, subject: string = '',
   moviePhotos: string[], ratingScore: string,
   genres: string[], duration: string, year: string, moviePersons: MoviePerson[],
   userRatings: UserRating[], userRating: number) {
@@ -34,21 +34,21 @@ export class Movie {
 }
 
 export enum Gender {
-  Man = "Man",
-  Woman = "Woman"
+  Man = 'Man',
+  Woman = 'Woman'
 }
 
 export enum Profession {
-  Cast = "Cast",
-  Writer = "Writer",
-  Director = "Director"
+  Cast = 'Cast',
+  Writer = 'Writer',
+  Director = 'Director'
 }
 
 export abstract class Person {
   id: number | null = 0;
-  name: string = "";
-  surname: string = "";
-  characterName: string = "";
+  name: string = '';
+  surname: string = '';
+  characterName: string = '';
   age = 0;
   gender: Gender = Gender.Man;
   professions: Profession[] = [];

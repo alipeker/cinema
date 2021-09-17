@@ -7,7 +7,7 @@ import { ERole } from '../store/movie/movie.model';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-}
+};
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +52,7 @@ export class AuthService {
     );
   }
 
-  logout() {
+  logout(): void {
     this.tokenStorage.signOut();
     this.currentUserSubject.next(this.tokenStorage.getUser());
   }

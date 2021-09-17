@@ -15,7 +15,7 @@ export class MovieRestService {
   }
 
   async getMovies(): Promise<Movie[]> {
-    return await this.http.get<Movie[]>("/proxy/movie/getMovies").toPromise().then(
+    return await this.http.get<Movie[]>('/proxy/movie/getMovies').toPromise().then(
       movies => {
         this.movieService.setMovies(movies);
         return movies;
@@ -26,7 +26,7 @@ export class MovieRestService {
   }
 
   async getMovie(movieId: number): Promise<Movie> {
-    return await this.http.get<Movie>("/proxy/movie/getMovie/" + movieId).toPromise().then(
+    return await this.http.get<Movie>('/proxy/movie/getMovie/' + movieId).toPromise().then(
       movie => {
         movie.moviePhotos[0] = movie.moviePhotos[0];
         return movie;
@@ -48,12 +48,9 @@ export class MovieRestService {
   async uploadMovieImage(image: File): Promise<any> {
     const formData = new FormData();
     formData.append('file', image);
-   
     let headers = new HttpHeaders();
-       headers = headers.append('enctype', 'multipart/form-data');
-   
-    return await this.http
-        .post<any>('/proxy/file/uploadImage/', formData, {headers}).toPromise();
+    headers = headers.append('enctype', 'multipart/form-data');   
+    return await this.http.post<any>('/proxy/file/uploadImage/', formData, {headers}).toPromise();
   }
 
   async createMovie(movie: Movie): Promise<Movie[]> {
@@ -65,7 +62,7 @@ export class MovieRestService {
   }
 
   async submitComment(userRating: UserRating, movieId: number): Promise<any> {
-    if(!userRating.id) {
+    if (!userRating.id) {
       userRating.id = uuid();
       return await this.http.post<any>('/proxy/movie/rating/' + movieId, userRating).toPromise();
     }
@@ -77,7 +74,7 @@ export class MovieRestService {
   }
 
   async getMostRatingMovies(): Promise<Movie[]> {
-    return await this.http.get<Movie[]>("/proxy/movie/getMostRatingMovies").toPromise();
+    return await this.http.get<Movie[]>('/proxy/movie/getMostRatingMovies').toPromise();
   }
 
 }

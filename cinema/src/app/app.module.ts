@@ -23,7 +23,6 @@ import { RegisterComponent } from './register/register.component';
 import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { ProfileComponent } from './profile/profile.component';
 import { UploadMovieComponent } from './upload-movie/upload-movie.component';
-import { SecureImagePipe } from './pipes/secure-image.pipe';
 import { UserCommentComponent } from './user-comment/user-comment.component';
 import { UserRatingComponent } from './user-rating/user-rating.component';
 import { MostRatingMoviesComponent } from './most-rating-movies/most-rating-movies.component';
@@ -43,7 +42,6 @@ import { MostRatingMoviesComponent } from './most-rating-movies/most-rating-movi
     RegisterComponent,
     ProfileComponent,
     UploadMovieComponent,
-    SecureImagePipe,
     UserCommentComponent,
     UserRatingComponent,
     MostRatingMoviesComponent

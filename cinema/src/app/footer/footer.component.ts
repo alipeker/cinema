@@ -22,11 +22,11 @@ export class FooterComponent implements OnInit {
     });
   }
 
-  nextButtonClick() {
+  nextButtonClick(): void {
     window.history.forward();
   }
 
-  previousButtonClick() {
+  previousButtonClick(): void {
     window.history.back();
   }
 

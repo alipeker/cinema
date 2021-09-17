@@ -8,8 +8,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 
 export enum UPLOADMODE {
-  "CREATE",
-  "UPDATE"
+  'CREATE',
+  'UPDATE'
 }
 
 @Component({
@@ -20,14 +20,14 @@ export enum UPLOADMODE {
 export class UploadMovieComponent implements OnInit {
   @ViewChild('moviePhotoFile', {static: true}) moviePhotoFile: ElementRef;
   movieForm: FormGroup;
-  uploadedImageUrl = "";
+  uploadedImageUrl = '';
   movie: Movie = new Movie(0, '', '', [], '', [], '', '', [], [], 0);
   mode: UPLOADMODE = UPLOADMODE.CREATE;
-  errorMessage = "";
-  successMessage = "";
+  errorMessage = '';
+  successMessage = '';
   
-  constructor(private form: FormBuilder, private movieRestService: MovieRestService, private route: ActivatedRoute,
-    private router: Router) {
+  constructor(private form: FormBuilder, private movieRestService: MovieRestService,
+              private route: ActivatedRoute, private router: Router) {
     this.movieForm = this.form.group({
       id: new FormData(),
       name: new FormControl(''),
@@ -42,7 +42,7 @@ export class UploadMovieComponent implements OnInit {
 
     const snapShot = this.route.snapshot;
     const routeParams = snapShot.paramMap;
-    if(routeParams.has("id") && (snapShot.routeConfig?.path === 'update')) {
+    if(routeParams.has('id') && (snapShot.routeConfig?.path === 'update')) {
       this.mode = UPLOADMODE.UPDATE;
       const movieId = Number(routeParams.get('id'));
 
@@ -82,28 +82,28 @@ export class UploadMovieComponent implements OnInit {
 
   createUpdateMovie() {
     const movieCopy = JSON.parse(JSON.stringify(this.movieForm.value)) as Movie;
-    movieCopy.genres = (typeof this.movieForm.value.genres === "string") ? this.movieForm.value.genres.split(" ") : this.movieForm.value.genres;
+    movieCopy.genres = (typeof this.movieForm.value.genres === 'string') ? this.movieForm.value.genres.split(' ') : this.movieForm.value.genres;
 
     if(this.mode === UPLOADMODE.CREATE) {
       movieCopy.id = 0;
       movieCopy.moviePersons = moviePersons;
       this.movieRestService.createMovie(movieCopy).then(
         movie => {
-          this.successMessage = "Movie has been successfully uploaded.";
-          this.errorMessage = "";
+          this.successMessage = 'Movie has been successfully uploaded.';
+          this.errorMessage = '';
         }
       ).catch(error => {
-        this.errorMessage = "Movie has been cannot be uploaded.";
+        this.errorMessage = 'Movie has been cannot be uploaded.';
         return error;
       });
     } else {
       this.movieRestService.updateMovie(movieCopy).then(
         movie => {
-          this.successMessage = "Movie has been successfully updated.";
-          this.errorMessage = "";
+          this.successMessage = 'Movie has been successfully updated.';
+          this.errorMessage = '';
         }
       ).catch(error => {
-        this.errorMessage = "Movie has been cannot be updated.";
+        this.errorMessage = 'Movie has been cannot be updated.';
         return error;
       });
     }

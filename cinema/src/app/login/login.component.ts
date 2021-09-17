@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
       this.user = user;
     });
 
-    if(!this.user) {
+    if (!this.user) {
       this.errorMessage = 'Wrong properties.';
     }
   }

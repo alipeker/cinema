@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   imageEndpoint: 'http://192.168.0.21',
-  port: "80"
+  port: '80'
 };
 
 /*

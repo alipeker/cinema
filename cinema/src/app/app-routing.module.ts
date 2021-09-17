@@ -5,15 +5,15 @@ import { MoviesComponent } from './movies/movies.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MovieComponent } from './movie/movie.component';
-import { AuthGuard } from './services/authguard.service';
+import { AuthguardService } from './services/authguard.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'movies', component: MoviesComponent, canActivate: [AuthGuard] },
-  { path: 'movie', component: MovieComponent , canActivate: [AuthGuard] },
-  { path: 'profile', component: ProfileComponent , canActivate: [AuthGuard]},
-  { path: 'upload', component: UploadMovieComponent , canActivate: [AuthGuard]},
-  { path: 'update', component: UploadMovieComponent , canActivate: [AuthGuard]}
+  { path: 'movies', component: MoviesComponent, canActivate: [AuthguardService] },
+  { path: 'movie', component: MovieComponent , canActivate: [AuthguardService] },
+  { path: 'profile', component: ProfileComponent , canActivate: [AuthguardService]},
+  { path: 'upload', component: UploadMovieComponent , canActivate: [AuthguardService]},
+  { path: 'update', component: UploadMovieComponent , canActivate: [AuthguardService]}
 ];
 
 @NgModule({

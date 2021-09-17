@@ -18,7 +18,7 @@ export class MostRatingMoviesComponent implements OnInit {
   ngOnInit(): void {
     this.movieRestService.getMostRatingMovies().then(movies => {
       this.movies = movies;
-    })
+    });
   }
 
   getImageUrl(moviePhotoUrl): string {

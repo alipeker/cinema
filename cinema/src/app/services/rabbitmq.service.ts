@@ -1,4 +1,3 @@
-import { ID } from '@datorama/akita';
 import { UserRating } from './../store/movie/movie.model';
 import { RabbitmqObject } from './../data/rabbitmq-object.data';
 import { Injectable } from '@angular/core';
@@ -22,12 +21,12 @@ export class RabbitmqService {
       // Typically login, passcode and vhost
       // Adjust these for your broker
       connectHeaders: {
-        login: "guest",
-        passcode: "guest"
+        login: 'guest',
+        passcode: 'guest'
       },
 
       // Broker URL, should start with ws:// or wss:// - adjust for your broker setup
-      brokerURL: "ws://127.0.0.1:15674/ws",
+      brokerURL: 'ws://127.0.0.1:15674/ws',
 
       // Keep it off for production, it can be quit verbose
       // Skip this key to disable

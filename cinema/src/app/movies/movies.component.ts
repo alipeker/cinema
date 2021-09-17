@@ -12,7 +12,7 @@ import { Movie } from '../store/movie/movie.model';
 })
 export class MoviesComponent implements OnInit {
   movies: Movie[] = [];
-  errorMessage: string = "";
+  errorMessage = '';
 
   constructor(private moviesRestService: MovieRestService, private movieQuery: MovieQuery) { }
 
@@ -26,19 +26,19 @@ export class MoviesComponent implements OnInit {
 
   getMovies(): void {
     this.moviesRestService.getMovies().then(movies => {
-      if(movies instanceof HttpErrorResponse) {
-        this.errorMessage = movies.status + " " + movies.statusText;
+      if (movies instanceof HttpErrorResponse) {
+        this.errorMessage = movies.status + ' ' + movies.statusText;
         return;
       }
       this.movies = movies;
     });
   }
 
-  async deleteMovie(movieId: number) {
+  async deleteMovie(movieId: number): Promise<void> {
     await this.moviesRestService.deleteMovie(movieId);
   }
 
-  getSource(name: string) {
+  getSource(name: string): string {
     return environment.imageEndpoint + name;
   }
 

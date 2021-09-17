@@ -1,4 +1,4 @@
-import { Operation } from "./operation.model";
+import { Operation } from './operation.model';
 
 export class RabbitmqObject {
     operation: Operation;

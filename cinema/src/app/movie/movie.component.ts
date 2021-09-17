@@ -18,11 +18,10 @@ export class MovieComponent {
   selectedUserRating: UserRating;
   movie: Movie | undefined;
   imageEndpoint = environment.imageEndpoint;
-  error = "";
+  error = '';
 
-  constructor(private route: ActivatedRoute, private movieRestService: MovieRestService,
-    private router: Router, private tokenStorageService: TokenStorageService,
-    private movieQuery: MovieQuery) {
+  constructor(private route: ActivatedRoute, private movieRestService: MovieRestService, private router: Router,
+              private tokenStorageService: TokenStorageService, private movieQuery: MovieQuery) {
     const routeParams = this.route.snapshot.paramMap;
     const movieId = Number(routeParams.get('id'));
     movieRestService.getMovie(movieId).then(movie => {
@@ -48,18 +47,18 @@ export class MovieComponent {
       this.selectedUserRating = this.createDefaultUserRating();
     }).catch(
       error => {
-        this.error = "You can not submit a comment for a movie."
+        this.error = 'You can not submit a comment for a movie.'
       });
   }
 
   editUserRating(userRating: UserRating): void {
-    if(userRating) {
+    if (userRating) {
       Object.assign(this.selectedUserRating, userRating);
     }
   }
 
   createDefaultUserRating(): UserRating {
-    return new UserRating(null, "", 1, this.tokenStorageService.getUser(), "");
+    return new UserRating(null, '', 1, this.tokenStorageService.getUser(), '');
   }
 
   createNewUserRating(): void {

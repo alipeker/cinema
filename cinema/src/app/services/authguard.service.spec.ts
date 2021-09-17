@@ -1,4 +1,4 @@
-import { AuthguardService } from './../sevices/authguard.service';
+import { AuthguardService } from './authguard.service';
 import { TestBed } from '@angular/core/testing';
 
 describe('AuthguardService', () => {
