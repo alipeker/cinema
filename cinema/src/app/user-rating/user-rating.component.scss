@@ -1,0 +1,15 @@
+:host ::ng-deep .movie-rating-star {
+    width: 24px;
+    height: 24px;
+    -webkit-mask:  url("/assets/star.svg") no-repeat 50% 50%;
+    background-color: white;
+}
+
+:host ::ng-deep .movie-rating-star-container {
+    display: inline-flex;
+    width: 100%;
+}
+
+:host ::ng-deep .card-body {
+    padding: 1rem 0rem;
+}

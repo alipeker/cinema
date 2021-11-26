@@ -1,0 +1,63 @@
+<div *ngIf="movie" class="movie-background" id="movie-background"
+  [ngStyle]="{'background-image': 'url(' + imageEndpoint + movie.moviePhotos[0]}">
+</div>
+
+<div class="movie-container" *ngIf="movie">
+  <div style="position: absolute;right: 0px;top: 0px;" >
+    <svg xmlns="http://www.w3.org/2000/svg" style="color: rgb(245, 197, 24); margin-left: 1rem" width="24" height="24" class="ipc-icon ipc-icon--star AggregateRatingButton__RatingIcon-sc-1ll29m0-4 iAOIoP" viewBox="0 0 24 24" fill="currentColor" role="presentation">
+      <path d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"></path>
+    </svg>
+    <span style="color: rgba(255,255,255);vertical-align: bottom;">
+      {{ movie.ratingScore }}
+      <small style="color: rgba(255,255,255,0.7);vertical-align: text-bottom;font-size: 0.8em;">/ 10</small>
+    </span>
+  </div>
+
+  <div class="row" style="height: 100%;">
+    <div class="col-md-8">
+      <div class="movie-image" [ngStyle]="{'background-image': 'url(' + imageEndpoint + movie.moviePhotos[0]}"></div>
+    </div>
+    <div class="col-md-4 movie-description">
+      <div style="height: 51%; overflow-y: auto;">
+        <div class="card-title" style="position: relative;margin-bottom: 0rem;">
+          <div style="display: flex;">
+            <h4>{{ movie.name }}</h4>
+            <!-- <div style="color: rgba(255,255,255,0.7);position: absolute;right: 0px;top: 0px;"><small>{{ movie.year }} {{ movie.duration }}</small>
+            </div> -->
+          </div>
+        </div>
+  
+        <div class="card-text">
+          <div class="movie-genres" *ngFor="let genre of movie.genres">{{ genre }}</div>
+        </div>
+  
+        <div class="card-text">{{ movie.subject }}</div>
+  
+        <div class="movie-cast" *ngFor="let cast of movie.moviePersons">
+            <img class="rounded-circle" src={{cast.photos[0]}}
+            data-holder-rendered="true" *ngIf="cast.photos.length > 0">
+            <span class="cast-name">
+              {{ cast.name }} {{ cast.surname }}
+              <span>Age: {{ cast.age }}</span>
+            </span>
+        </div>
+      </div>
+      <button class="btn btn-dark btn-sm" (click)="createNewUserRating()">New Comment</button>
+      <div class="user-rating">
+        <app-user-comment #userRatings *ngFor="let comment of movie.userRatings" [userRating]="comment"
+        (editUserRatingEvent)="editUserRating(userRatings.userRating)" [movieId] = "movie.id"></app-user-comment>
+      </div>
+      <div class="user-comment">
+        <div *ngIf="error !== ''" class="movie-comment">{{error}}</div>
+        <app-user-rating [static]="false" #userRating [ratingScore]="selectedUserRating.rating"></app-user-rating>
+        <br>
+        <textarea style="width: 100%;" #userComment [value]="selectedUserRating.comment"></textarea>
+        <br>
+        <div style="text-align: center;">
+          <button class="btn btn-dark" (click)="submitComment(userRating.ratingScore, userComment.value)">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

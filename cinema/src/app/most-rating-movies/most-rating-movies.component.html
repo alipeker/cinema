@@ -1,0 +1,39 @@
+<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel"
+    style="background-color: black;">
+    <div class="carousel-inner">
+        <div class="carousel-item active" *ngFor="let movie of movies"
+            [ngClass]="{'active': movies.indexOf(movie) === 0}">
+
+            <div style="color: white;margin-left: 1rem;margin-top: 1rem;">
+                <h5>
+                    <span style="color:#f5c518">Rank:</span> {{movies.indexOf(movie) + 1}}
+                </h5>
+            </div>
+
+            <div class="d-block w-100 carousel-image"
+                [ngStyle]="{'background-image': 'url(' + imageEndpoint + movie.moviePhotos[0]}"></div>
+
+            <div class="carousel-caption d-md-block" style="background-color: rgba(0, 0, 0, 0.5);">
+                <h5>{{movie.name}}</h5>
+                <p>{{movie.subject}}</p>
+                <p style="display: inline-flex;">
+                    User Rate:
+                    <span class="movie-rating-star" style="margin-left: 0.2rem;">
+                    </span>
+                    {{movie.userRating}} / 10
+                </p>
+                <p style="text-decoration: underline;cursor: pointer;" [routerLink]="['/movie', { id: movie.id}]">
+                    {{ movie.userRatings.length }} Vote
+                </p>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>

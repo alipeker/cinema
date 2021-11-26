@@ -1,0 +1,30 @@
+:host ::ng-deep .movie-rating-star {
+    width: 24px;
+    height: 24px;
+    -webkit-mask:  url("/assets/star.svg") no-repeat 50% 50%;
+    background-color: rgb(245, 197, 24);
+}
+
+:host ::ng-deep .carousel-item{
+    height: 50vh;
+}
+
+:host ::ng-deep .carousel-item > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 50vh;
+}
+
+:host ::ng-deep .carousel-image {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 96.5%;
+}
+
+:host ::ng-deep .carousel-caption {
+    bottom: 0rem;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+}
